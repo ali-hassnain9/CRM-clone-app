@@ -53,12 +53,12 @@ export const Leads = () => {
               classification={item.classification}
               category={item.category.name}
               status={item.status.name}
-              date={moment(item.created_at).format("Do MMM YYYY")}
+              date={moment(item.created_at).format("D MMM YYYY")}
               status={item.status.name}
             />
           )}
           keyExtractor={(item) => item.id}
-          // showsVerticalScrollIndicator={true}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </SafeAreaView>
