@@ -33,6 +33,7 @@ export const Leads = () => {
   
   const navigation = useNavigation();
   const leads = useSelector(state => state.LeadsReducer.data.crm_leads)
+  console.log(leads)
 
   return(
     <SafeAreaView style={styles.main}>
@@ -50,9 +51,11 @@ export const Leads = () => {
               leadID={item.id}
               name={item.client.name}
               classification={item.classification}
-              buyer={'buyer'}
+              category={item.category.name}
               status={item.status.name}
-              date={moment(item.created_at).format("Do MMM YYYY")}/>
+              date={moment(item.created_at).format("Do MMM YYYY")}
+              status={item.status.name}
+            />
           )}
           keyExtractor={(item) => item.id}
           // showsVerticalScrollIndicator={true}

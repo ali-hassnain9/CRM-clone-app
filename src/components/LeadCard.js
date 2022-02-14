@@ -1,36 +1,57 @@
 import React from 'react'
 import { View, Text, Image,StyleSheet } from 'react-native'
-import { IC_BUYER, IC_MODERATE } from '../../assets'
+import { IC_BUYER, IC_MODERATE ,IC_SELLER} from '../../assets'
 
 export const LeadCard = (props) => {
   return (
-    <View style={{ backgroundColor:'#fff',marginHorizontal:20,marginVertical:5,paddingVertical:15,borderRadius:5}}>
-      <View style={{ marginVertical:15,justifyContent: 'space-between', flexDirection: 'row', width: '90%', marginHorizontal: 20,alignItems:'center' }}>
+    <View style={styles.card}>
+      <View style={styles.cardFirstLine}>
         <View>
-          <Text style={{color:'#bebebe'}}>Lead ID: {props.leadID}</Text>
-          <Text style={{ fontSize: 20, fontWeight: 'bold'}}>{props.name}</Text>
+          <Text style={styles.leadId}>Lead ID: {props.leadID}</Text>
+          <Text style={styles.name}>{props.name}</Text>
         </View>
         
-        <View style={{ backgroundColor: '#e2fbff',padding:10 ,borderRadius:20,alignItems:'center'}}>
-          <Text style={{ color: '#288dbc' }}>In progress</Text>
+        <View style={styles.status}>
+          <Text style={styles.statusText}>{props.status}</Text>
         </View>
       </View>
       <View
-        style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 20 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={IC_MODERATE} resizeMode={'contain'} style={{ height: 20, width: 20 ,marginEnd:5}}/>
-          <Text style={{color:'#6c6c6c',marginEnd:5}}>{props.classification}</Text>
-          <View style={{ height: 15, borderWidth: 0.5 ,color:'#6c6c6c',marginLeft:5,marginRight:10}}/>
-          <Image source={IC_BUYER} resizeMode={'contain'} style={{ height: 20, width: 20,marginEnd:5 }}/>
-          <Text style={{color:"#6c6c6c"}}>{props.buyer}</Text>
+        style={styles.allIconsAndDate}>
+        <View style={styles.allIcons}>
+          <Image source={IC_MODERATE} resizeMode={'contain'} style={styles.iconOne}/>
+          <Text style={styles.iconOneText}>{props.classification}</Text>
+          <View style={styles.break}/>
+          <Image source={props.category==='Buyer'?IC_BUYER:IC_SELLER} resizeMode={'contain'} style={styles.iconTwo}/>
+          <Text style={styles.categoryText}>{props.category}</Text>
         </View>
-        <Text style={{color:'#848c98',fontSize:12}}>{props.date}</Text>
+        <Text style={styles.date}>{props.date}</Text>
       </View>
     </View>
   
   )
 }
 const styles = StyleSheet.create({
-
+card:{ backgroundColor:'#fff',marginHorizontal:20,marginVertical:5,paddingVertical:15,borderRadius:5},
+  cardFirstLine:{ marginVertical:15,justifyContent: 'space-between', flexDirection: 'row', width: '90%', marginHorizontal: 20,alignItems:'center' },
+  leadId:{color:'#bebebe'},
+  name:{ fontSize: 20, fontWeight: 'bold'},
+  status:{ backgroundColor: '#e2fbff',padding:10 ,borderRadius:20,alignItems:'center'},
+  statusText:{ color: '#288dbc' },
+  allIconsAndDate:{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 20 },
+  allIcons:{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
+  iconOne:{ height: 20, width: 20 ,marginEnd:5},
+  iconOneText:{color:'#6c6c6c',marginEnd:5},
+  break:{ height: 15, borderWidth: 0.5 ,color:'#6c6c6c',marginLeft:5,marginRight:10},
+  iconTwo:{ height: 20, width: 20,marginEnd:5 },
+  categoryText:{color:"#6c6c6c"},
+  date:{color:'#848c98',fontSize:12}
+  
+  
+  
+  
+  
+  
+  
+  
 })
 

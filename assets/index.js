@@ -7,5 +7,6 @@ export const IC_TASKS = require('./ic_tasks.png')
 export const IC_INVENTORY = require('./ic_inventory.png')
 export const IC_MORE = require('./ic_more.png')
 export const IC_BUYER = require('./ic_buyer.png')
+export const IC_SELLER = require('./ic_seller.png')
 export const IC_MODERATE = require('./ic_moderate.png')
 
