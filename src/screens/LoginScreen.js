@@ -6,10 +6,8 @@ import CheckBox from '@react-native-community/checkbox'
 import { IC_HIDE_PASSWORD, IC_LOGO, IC_SHOW_PASSWORD } from '../../assets'
 import axios from 'axios'
 import { useNavigation } from '@react-navigation/native'
-import {useDispatch} from 'react-redux';
-import { Dashboard } from './Dashboard'
+import { useDispatch } from 'react-redux'
 import { fetchLeads, loggedInUser } from '../redux/action/action'
-
 
 export const LoginScreen = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false)

@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, Image,StyleSheet } from 'react-native'
-import { IC_BUYER, IC_MODERATE ,IC_SELLER} from '../../assets'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import { IC_BUYER, IC_MODERATE, IC_SELLER } from '../../assets'
 
 export const LeadCard = (props) => {
   return (
