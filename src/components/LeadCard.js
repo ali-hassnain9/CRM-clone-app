@@ -22,7 +22,7 @@ export const LeadCard = (props) => {
           <Text style={{color:'#6c6c6c',marginEnd:5}}>{props.classification}</Text>
           <View style={{ height: 15, borderWidth: 0.5 ,color:'#6c6c6c',marginLeft:5,marginRight:10}}/>
           <Image source={IC_BUYER} resizeMode={'contain'} style={{ height: 20, width: 20,marginEnd:5 }}/>
-          <Text style={{color:"#6c6c6c"}}>{props.buyer}</Text>
+          <Text>{props.buyer}</Text>
         </View>
         <Text style={{color:'#848c98',fontSize:12}}>{props.date}</Text>
       </View>
