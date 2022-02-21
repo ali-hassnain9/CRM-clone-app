@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 
 export const More = ({route}) => {
   const navigation = useNavigation();
-  console.log(route)
   return(
     <SafeAreaView style={styles.main}>
       <Text style={styles.text}>More</Text>
@@ -15,7 +14,9 @@ export const More = ({route}) => {
 }
 const styles = StyleSheet.create({
   main:{
-    flex:1,alignItems:'center',justifyContent:'center'
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center'
   },
   text:{
     fontSize:40,
