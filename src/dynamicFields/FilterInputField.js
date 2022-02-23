@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
 
 function FilterInputField (props) {
-  const [input, setInput] = useState("")
-  
-  useEffect(() => {
-    input && props.getAllFilters({ [props.field]: input })
-  }, [input])
+  // useEffect(() => {
+  //   input && props.getAllFilters({ [props.field]: input })
+  // }, [input])
+  //call back method used here saving it for the future.
   
   return (
     <View style={styles.inputCard}>

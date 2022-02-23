@@ -1,7 +1,14 @@
 import React from 'react'
 
 const initialValues = {
-  state:{}
+  state:{
+    assignee: [],
+    lead_category: [],
+    lead_client_email: "",
+    lead_ref_id: "",
+    lead_source: [],
+    slugs: [],
+  }
 }
 const LeadsFilterReducer = (state = initialValues, action) => {
   switch (action.type) {

@@ -1,28 +1,27 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 
-const Skeleton = () => {
+const Skeleton = props => {
   return (
     <View>
-      {Array(5).fill().map((item, index) => {
-        return (
-          
-          <View key={index} style={styles.placeholderStyle}>
-            <View style={styles.leadIdContainer}/>
-            <View style={styles.leadStatusContainer}/>
-            <View style={styles.leadNameContainer}/>
-            <View style={styles.leadTypeContainer}/>
-            <View style={styles.leadDateContainer}/>
-          </View>
-        
-        )
-      })}
-    
+      {props.loading &&
+        Array(5)
+          .fill()
+          .map((item, index) => {
+            return (
+              <View key={index} style={styles.placeholderStyle}>
+                <View style={styles.leadIdContainer} />
+                <View style={styles.leadStatusContainer} />
+                <View style={styles.leadNameContainer} />
+                <View style={styles.leadTypeContainer} />
+                <View style={styles.leadDateContainer} />
+              </View>
+            );
+          })}
     </View>
-  
-  )
-}
-export default Skeleton
+  );
+};
+export default Skeleton;
 const styles = StyleSheet.create({
   placeholderStyle: {
     height: 110,
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingTop: 10,
     marginBottom: 5,
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   leadIdContainer: {
     height: 10,
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#e1e4e8',
     top: 20,
-    marginStart: 10
+    marginStart: 10,
   },
   leadTypeContainer: {
     height: 10,
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#e1e4e8',
     top: 40,
-    marginStart: 10
+    marginStart: 10,
   },
   leadDateContainer: {
     height: 10,
@@ -76,4 +75,4 @@ const styles = StyleSheet.create({
     marginStart: 10,
     left: 250,
   },
-})
+});
