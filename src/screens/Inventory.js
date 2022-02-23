@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 
 export const Inventory = ({route}) => {
   const navigation = useNavigation();
-  console.log(route)
   return(
     <SafeAreaView style={styles.main}>
       <Text style={styles.text}>Inventory</Text>
@@ -14,8 +13,8 @@ export const Inventory = ({route}) => {
   )
 }
 const styles = StyleSheet.create({
-  main:{
-    flex:1,alignItems:'center',justifyContent:'center'
+  main: {
+    flex: 1, alignItems: 'center', justifyContent: 'center'
   },
   text:{
     fontSize:40,

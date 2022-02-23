@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { LoginScreen } from '../screens/LoginScreen'
 import { BottomTabs } from './BottomTabs'
 import {useSelector} from 'react-redux';
+import FilterScreen from '../screens/FilterScreen'
 
 
 
@@ -10,15 +11,17 @@ const Stack = createNativeStackNavigator()
 
 export const AuthStack = () => {
   const userStatus = useSelector(state => state.LoggedInUser.loggedInUser.status)
-  // const userStatus = 200
   return (
     <>
       {
-        userStatus === 200 ? (
+        userStatus ? (
           <Stack.Navigator>
             <Stack.Screen options={{
               headerShown: false,
             }} name="BottomTabs" component={BottomTabs}/>
+            <Stack.Screen name="FilterScreen" component={FilterScreen} options={{
+              headerShown: false,
+            }}/>
           </Stack.Navigator>
         ) : (
           <Stack.Navigator>

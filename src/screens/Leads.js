@@ -1,60 +1,37 @@
 import React, { useState } from 'react'
-import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native'
 import { useSelector } from 'react-redux'
-import { LeadCard } from '../components/LeadCard'
-import moment from 'moment'
 import { TabBar, TabBarIndicator, TabView } from 'react-native-tab-view'
+import FlatLeads from '../components/Flatleads'
 
 export const Leads = () => {
-  const [index, setIndex] = React.useState(0)
+  const [index, setIndex] = useState(0)
   const [routes] = useState([
     { key: 'first', title: 'All' },
     { key: 'second', title: 'Seller' },
     { key: 'third', title: 'Buyer' },
   ])
-  const leads = useSelector(state => state.LeadsReducer.data.crm_leads)
-  const buyerLeads = leads.filter((item) => item.category.name === 'Buyer')
-  const sellerLeads = leads.filter((item) => item.category.name === 'Seller')
   
-  const FlatLeads = (props) => {
-    return (
-      <View>
-        <FlatList
-          data={props.data}
-          renderItem={({ item }) => (
-            <LeadCard
-              leadID={item.id}
-              name={item.client.name}
-              classification={item.classification}
-              category={item.category.name}
-              status={item.status.name}
-              date={moment(item.created_at).format('D MMM YYYY')}
-              status={item.status.name}
-            />
-          )}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
-    )
-  }
+  const leads = useSelector(state => state.LeadsReducer?.data)
+  const buyerLeads = leads?.filter((item) => item.category.name === 'Buyer')
+  const sellerLeads = leads?.filter((item) => item.category.name === 'Seller')
   
-  const All = () => (<FlatLeads data={leads}/>)
+  const All = <FlatLeads data={leads}/>
   
-  const Seller = () => (<FlatLeads data={sellerLeads}/>)
+  const Seller = <FlatLeads data={sellerLeads}/>
   
-  const Buyer = () => (<FlatLeads data={buyerLeads}/>)
+  const Buyer = <FlatLeads data={buyerLeads}/>
   
   const renderScene = ({ route }) => {
     switch (route.key) {
       case 'first':
-        return <All/>
+        return All
       case 'second':
-        return <Seller/>
+        return Seller
       case 'third':
-        return <Buyer/>
+        return Buyer
       default:
-        return <All/>
+        return All
     }
   }
   const renderIndicator = (props) => <TabBarIndicator {...props} style={styles.tabBarIndicatorStyle}/>
@@ -62,15 +39,7 @@ export const Leads = () => {
     <ScrollView
       horizontal={true}
       nestedScrollEnabled={true}
-      style={{
-        flexGrow: 0,
-        marginBottom: 5,
-        backgroundColor: '#f2f2f2',
-        borderBottomColor: '#e5e4e4',
-        borderBottomWidth: 0.5,
-        width: '90%',
-        marginHorizontal: 20
-      }}
+      style={styles.scrollView}
       showsHorizontalScrollIndicator={true}
       scrollEventThrottle={200}
       bounces={false}
@@ -90,12 +59,14 @@ export const Leads = () => {
   return (
     <SafeAreaView style={styles.main}>
       <Text style={styles.title}>All Leads</Text>
+      
       <TabView
         renderScene={renderScene}
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
         renderTabBar={renderTabBar}
       />
+    
     </SafeAreaView>
   )
 }
@@ -104,7 +75,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     flex: 1,
   },
-  title: { fontSize: 18, fontWeight: 'bold', marginHorizontal: 20 },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginHorizontal: 20
+  },
   tabBarStyle: {
     elevation: 0,
   },
@@ -121,5 +96,14 @@ const styles = StyleSheet.create({
     padding: 0,
     marginRight: 40,
   },
+  scrollView: {
+    flexGrow: 0,
+    marginBottom: 5,
+    backgroundColor: '#f2f2f2',
+    borderBottomColor: '#e5e4e4',
+    borderBottomWidth: 0.5,
+    width: '90%',
+    marginHorizontal: 20
+  }
   
 })

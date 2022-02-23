@@ -6,25 +6,32 @@ import CheckBox from '@react-native-community/checkbox'
 import { IC_HIDE_PASSWORD, IC_LOGO, IC_SHOW_PASSWORD } from '../../assets'
 import axios from 'axios'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
-import { fetchLeads, loggedInUser } from '../redux/action/action'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchLeads } from '../redux/action/FetchLeadsAction'
+import { loggedInUser } from '../redux/action/LoggedInUserAction'
 
 export const LoginScreen = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
   const [showPassword, setShowPassword] = useState(true)
   const navigation = useNavigation()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   
   const networkRequest = async (values) => {
+    
     const response = await axios.post('https://dev2.empgautos.com/auth/sign_in', values)
     if (response.status === 200) {
       dispatch(loggedInUser(response))
       const header = response.headers
-      const leadsResponse = await axios.get('https://dev2.empgautos.com/api/crm/crm_leads',
+      const leadsResponse = await axios.get('https://dev2.empgautos.com/api/crm/crm_leads?page=1',
         { headers: header }
-    )
-      console.log('leadsResponse',leadsResponse)
-      dispatch(fetchLeads(leadsResponse.data))
+      )
+      console.log('maxPage:leadsResponse?.data?.pagination?.total_pages  ', leadsResponse?.data?.pagination?.total_pages)
+      dispatch(fetchLeads({
+        data: leadsResponse.data?.crm_leads,
+        maxPage: leadsResponse?.data?.pagination?.total_pages,
+        currentPage: leadsResponse?.data?.pagination?.current_page,
+        nextPage: leadsResponse?.data?.pagination?.next_page
+      }))
       navigation.navigate('BottomTabs')
     }
   }
@@ -99,10 +106,28 @@ export const LoginScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  main: { flex: 1, backgroundColor: '#fff', justifyContent: 'center' },
-  logo: { height: 100, width: 200, marginHorizontal: 20, marginVertical: 10 },
-  heading: { fontWeight: 'bold', marginHorizontal: 20, fontSize: 20 },
-  welcomeText: { marginHorizontal: 20, marginTop: 5, marginBottom: 25, color: '#a0a0a0' },
+  main: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center'
+  },
+  logo: {
+    height: 100,
+    width: 200,
+    marginHorizontal: 20,
+    marginVertical: 10
+  },
+  heading: {
+    fontWeight: 'bold',
+    marginHorizontal: 20,
+    fontSize: 20
+  },
+  welcomeText: {
+    marginHorizontal: 20,
+    marginTop: 5,
+    marginBottom: 25,
+    color: '#a0a0a0'
+  },
   spanText: { color: '#0f53e6' },
   showHide: {
     height: 35,
@@ -112,8 +137,14 @@ const styles = StyleSheet.create({
     right: 20,
     tintColor: '#000'
   },
-  checkbox: { marginLeft: 20, marginVertical: 20, },
-  checkboxText: { fontSize: 12, marginHorizontal: 10 },
+  checkbox: {
+    marginLeft: 20,
+    marginVertical: 20,
+  },
+  checkboxText: {
+    fontSize: 12,
+    marginHorizontal: 10
+  },
   button: {
     backgroundColor: '#0e53e6',
     width: '90%',
@@ -124,6 +155,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  buttonText: { color: '#fff' },
-  bottomText:{color:'#a0a0a0', bottom:-120,position:'relative',alignSelf:'center'}
+  buttonText: {
+    color: '#fff'
+  },
+  bottomText: {
+    color: '#a0a0a0',
+    bottom: -120,
+    position: 'relative',
+    alignSelf: 'center'
+  }
 })

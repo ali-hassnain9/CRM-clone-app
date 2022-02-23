@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
   tab:{
     marginVertical:0,
     marginHorizontal:0,
+    // justifyContent:'center',
     alignItems:'center',
     marginLeft:10
     
